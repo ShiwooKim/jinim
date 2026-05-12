@@ -1,21 +1,46 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans_KR, Noto_Serif_KR } from "next/font/google";
 import "@/styles/globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-sans-kr",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const notoSerifKr = Noto_Serif_KR({
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-serif-kr",
+  display: "swap",
 });
+
+const siteDescription =
+  "AI가 무엇이든 만들어내는 시대에, 사람이 실제로 지니고 살아온 물건의 의미와 시간을 기록하는 취향 아카이브.";
 
 export const metadata: Metadata = {
-  title: "지님 Jinim",
-  description:
-    "AI가 무엇이든 만들어내는 시대에, 사람이 실제로 지니고 살아온 물건의 의미와 시간을 기록하는 취향 아카이브.",
+  metadataBase: new URL("https://jinim.kr"),
+  title: "지님(Jinim) — 오래 지닌 물건의 시간을 기록하는 취향 아카이브",
+  description: siteDescription,
+  openGraph: {
+    title: "지님(Jinim) — 오래 지닌 물건의 시간을 기록하는 취향 아카이브",
+    description: siteDescription,
+    locale: "ko_KR",
+    type: "website",
+    url: "https://jinim.kr",
+    images: [{ url: "/jinim-logo.png", alt: "지님" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "지님(Jinim)",
+    description: siteDescription,
+    images: ["/jinim-logo.png"],
+  },
+  icons: {
+    icon: "/jinim-logo.png",
+    apple: "/jinim-logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -26,9 +51,13 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${notoSansKr.variable} ${notoSerifKr.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body
+        className={`${notoSansKr.className} flex min-h-full flex-col bg-jinim-ivory text-jinim-text`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
