@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { saveGuestCardSession } from '@/lib/guest-card-storage'
 
 const CATEGORIES = [
   '시계',
@@ -163,6 +164,7 @@ export function GuestCardForm() {
         return
       }
 
+      saveGuestCardSession(data.cardUrl, data.shareSlug)
       router.push(data.cardUrl)
     } catch {
       setError('지님 카드를 만들지 못했습니다. 잠시 후 다시 시도해주세요.')

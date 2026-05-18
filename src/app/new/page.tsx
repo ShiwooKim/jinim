@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { GuestCardForm } from '@/components/cards/GuestCardForm'
+import { NewCardContent } from '@/components/cards/NewCardContent'
 
 export default function NewCardPage() {
   return (
@@ -40,7 +40,7 @@ export default function NewCardPage() {
           </p>
         </header>
 
-        <GuestCardForm />
+        <NewCardContent />
       </main>
     </div>
   )
