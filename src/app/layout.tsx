@@ -17,7 +17,7 @@ const notoSerifKr = Noto_Serif_KR({
 });
 
 const siteDescription =
-  "AI가 무엇이든 만들어내는 시대에, 사람이 실제로 지니고 살아온 물건의 의미와 시간을 기록하는 취향 아카이브.";
+  "오래 지닌 물건에 담긴 시간과 의미를 기록하는 취향 아카이브, 지님.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jinim.kr"),
