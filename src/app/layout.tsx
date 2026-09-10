@@ -1,20 +1,7 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR, Noto_Serif_KR } from "next/font/google";
+import { ServicePausedOverlay } from "@/components/brand/ServicePausedOverlay";
+import { SERVICE_PAUSED } from "@/lib/service-paused";
 import "@/styles/globals.css";
-
-const notoSansKr = Noto_Sans_KR({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-sans-kr",
-  display: "swap",
-});
-
-const notoSerifKr = Noto_Serif_KR({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-serif-kr",
-  display: "swap",
-});
 
 const siteDescription =
   "오래 지닌 물건에 담긴 시간과 의미를 기록하는 취향 아카이브, 지님.";
@@ -49,14 +36,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ko"
-      className={`${notoSansKr.variable} ${notoSerifKr.variable} h-full scroll-smooth antialiased`}
-    >
-      <body
-        className={`${notoSansKr.className} flex min-h-full flex-col bg-jinim-ivory text-jinim-text`}
-      >
-        {children}
+    <html lang="ko" className="h-full scroll-smooth antialiased">
+      <body className="flex min-h-full flex-col bg-jinim-ivory font-sans text-jinim-text">
+        {SERVICE_PAUSED ? <ServicePausedOverlay /> : null}
+        {SERVICE_PAUSED ? (
+          <div inert className="select-none">
+            {children}
+          </div>
+        ) : (
+          children
+        )}
       </body>
     </html>
   );

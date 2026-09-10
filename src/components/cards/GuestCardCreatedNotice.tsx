@@ -26,10 +26,10 @@ export function GuestCardCreatedNotice({ cardUrl }: GuestCardCreatedNoticeProps)
           내 지님 카드 다시 보기
         </Link>
         <Link
-          href="/login"
+          href="/login?next=/me"
           className="inline-flex items-center justify-center rounded-2xl border border-[#DDD2C4] bg-white/80 px-6 py-3 text-sm font-medium text-[#4A3B30] transition hover:border-[#7A624C]/50 hover:bg-[#F5F1EA]"
         >
-          카카오로 소품함 만들기
+          Google로 소품함 만들기
         </Link>
       </div>
     </section>

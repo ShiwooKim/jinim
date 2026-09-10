@@ -63,16 +63,18 @@ Supabase Auth의 `auth.users`와 1:1로 연결된다.
 | `id` | uuid pk | Supabase Auth user id |
 | `nickname` | text | 표시 이름 |
 | `email` | text | 이메일 |
-| `provider` | text | `kakao` |
-| `avatar_url` | text nullable | 카카오 프로필 이미지 |
+| `provider` | text | `google` |
+| `avatar_url` | text nullable | Google 프로필 이미지 |
 | `created_at` | timestamptz | 생성일 |
 | `updated_at` | timestamptz | 수정일 |
 
 ### 비고
 
 - `id`는 `auth.users.id`를 그대로 사용한다.
-- 카카오 로그인 성공 시 profile을 생성하거나 업데이트한다.
+- Google 로그인 성공 시 profile을 생성하거나 업데이트한다. (`provider = google`)
 - 닉네임은 나중에 수정 가능하게 둔다.
+- 1차 MVP는 Google만 지원. Kakao는 추후 검토. OAuth Redirect URI 구분·E2E는 `docs/auth/google-oauth-setup.md`.
+- 기존 DB에 DEFAULT `kakao`가 남아 있으면 `docs/database/alter-provider-google.sql`로 DEFAULT만 `google`로 변경한다. (기존 행 강제 UPDATE 없음)
 
 ---
 
@@ -174,7 +176,7 @@ jinim.kr/c/old-watch-a8f3
 | `status`           | `published` |
 
 게스트는 카드 생성 후 수정할 수 없다.
-수정/소품함 저장/추가 생성 시 카카오 로그인을 유도한다.
+수정/소품함 저장/추가 생성 시 Google 로그인을 유도한다.
 
 ### 회원 카드 정책
 
@@ -350,7 +352,7 @@ MVP에서는 너무 복잡하게 하지 않으려면:
 
 ## 10. 게스트 → 회원 전환 처리
 
-게스트가 카드를 만든 뒤 카카오 로그인하면, 해당 카드를 회원 소품함에 담을 수 있어야 한다.
+게스트가 카드를 만든 뒤 Google 로그인하면, 해당 카드를 회원 소품함에 담을 수 있어야 한다.
 
 ### 처리 흐름
 
@@ -358,7 +360,7 @@ MVP에서는 너무 복잡하게 하지 않으려면:
 1. 게스트 카드 생성
 2. guest_token을 브라우저 localStorage 또는 쿠키에 저장
 3. 사용자가 “소품함에 담기” 클릭
-4. 카카오 로그인
+4. Google 로그인
 5. 로그인 후 guest_token으로 기존 카드 조회
 6. 해당 카드의 user_id, collection_id 업데이트
 7. is_guest_created = false 처리
@@ -382,7 +384,7 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   nickname text,
   email text,
-  provider text default 'kakao',
+  provider text default 'google',
   avatar_url text,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
@@ -533,7 +535,7 @@ DB 작업은 아래 순서로 가는 게 좋다.
 3. Storage bucket 생성
 4. 게스트 카드 생성 API 구현
 5. 카드 공유 페이지 구현
-6. 카카오 로그인 구현
+6. Google 로그인 구현
 7. 게스트 카드 → 회원 소품함 귀속 구현
 8. 회원 소품함 페이지 구현
 9. 회원 카드 추가/수정/삭제 구현

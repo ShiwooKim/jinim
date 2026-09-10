@@ -16,6 +16,17 @@ npm run dev
 
 브라우저에서 [http://localhost:3000](http://localhost:3000) 을 엽니다.
 
+## 인증 (1차: Google만)
+
+- CTA: **Google로 소품함 만들기**
+- 로그인 후 확인: `/me` (임시)
+- **Google Cloud Authorized redirect URI** = Supabase Auth callback  
+  (`https://[PROJECT_REF].supabase.co/auth/v1/callback`)  
+  — 앱의 `/auth/callback`을 넣지 않는다.
+- **Supabase Redirect URLs** = 앱 callback  
+  (`http://localhost:3000/auth/callback`, `https://jinim.kr/auth/callback` 등)
+- 설정·E2E 체크리스트: [`docs/auth/google-oauth-setup.md`](docs/auth/google-oauth-setup.md)
+
 ## 폴더 구조 (시작점)
 
 ```

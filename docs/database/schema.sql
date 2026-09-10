@@ -11,7 +11,7 @@ CREATE TABLE public.profiles (
   id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   nickname text,
   email text,
-  provider text DEFAULT 'kakao',
+  provider text DEFAULT 'google',
   avatar_url text,
   created_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now()

@@ -8,6 +8,11 @@
   --jinim-subtle: #ddd2c4;
   --background: var(--jinim-ivory);
   --foreground: var(--jinim-text);
+  /* Google Fonts 네트워크 의존 제거 — 로컬 미리보기/보류용 시스템 스택 */
+  --font-sans-kr: "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR",
+    "Malgun Gothic", "Apple Gothic", sans-serif;
+  --font-serif-kr: "Apple Myungjo", "Nanum Myeongjo", "Noto Serif KR",
+    "Songti SC", "Batang", Georgia, serif;
 }
 
 @theme inline {
@@ -25,7 +30,7 @@
 body {
   background-color: var(--jinim-ivory);
   color: var(--jinim-text);
-  font-family: var(--font-sans-kr), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans-kr);
 }
 
 /* 아주 옅은 종이 질감 (히어로 등) */
@@ -35,4 +40,24 @@ body {
     rgb(122 98 76 / 0.06),
     transparent 55%
   );
+}
+
+/* 서비스 보류 오버레이 */
+@keyframes service-paused-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.service-paused-panel {
+  animation: service-paused-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+body:has([aria-modal="true"]) {
+  overflow: hidden;
 }

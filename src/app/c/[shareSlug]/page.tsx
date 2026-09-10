@@ -300,10 +300,10 @@ export default async function SharedCardPage({ params }: PageProps) {
             소품함을 만들면 지님 카드를 다시 보고, 더 많은 물건을 기록할 수 있습니다.
           </p>
           <Link
-            href="/login"
+            href="/login?next=/me"
             className="mt-6 inline-flex items-center justify-center rounded-2xl border border-[#7A624C] bg-[#7A624C] px-6 py-3 text-sm font-medium text-[#F5F1EA] transition hover:bg-[#4A3B30] hover:border-[#4A3B30]"
           >
-            카카오로 소품함 만들기
+            Google로 소품함 만들기
           </Link>
         </section>
       </main>

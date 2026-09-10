@@ -1,8 +1,9 @@
-import { supabase } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
 
 export default async function SupabaseTestPage() {
+  const supabase = await createClient()
   const { data, error } = await supabase
     .from('health_check')
     .select('*')
